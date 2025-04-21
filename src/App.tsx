@@ -1,52 +1,46 @@
 import { useState } from 'react'
-import { BaseApiClient } from './api/ApiClient'
-import { Interceptors } from './api/interceptors'
 import './App.css'
+import questions from './question'
+import { useNavigate } from 'react-router-dom'
 
-function App() {
-  const [response, setResponse] = useState<string>('')
+export default function App() {
+  const navigate = useNavigate()
 
-  const handleTestApi = async () => {
-    // Example interceptors - these would be implemented by the candidate
-    const interceptors: Interceptors = {
-      request: {
-        onRequest: (config) => {
-          // TODO: Implement request interceptor
-          return config
-        },
-      },
-      response: {
-        onResponse: (response) => {
-          // TODO: Implement response interceptor
-          return response
-        },
-      },
-    }
-
-    const apiClient = new BaseApiClient('https://jsonplaceholder.typicode.com', interceptors)
-
-    try {
-      const result = await apiClient.get('/todos/1')
-      setResponse(JSON.stringify(result, null, 2))
-    } catch (error) {
-      setResponse(`Error: ${error instanceof Error ? error.message : 'Unknown error'}`)
-    }
-  }
+  const [activeQuestion, setActiveQuestion] = useState<number>(1)
 
   return (
     <div className="App">
-      <h1>API Client Interview Task</h1>
-      <div className="card">
-        <button onClick={handleTestApi}>
-          Test API Client
-        </button>
-        <pre>{response}</pre>
+      <h1>Frontend Interview Questions</h1>
+      
+      <div className="questions-nav">
+        {questions.map((q) => (
+          <button
+            key={q.id}
+            className={`nav-button ${activeQuestion === q.id ? 'active' : ''}`}
+            onClick={() => setActiveQuestion(q.id)}
+          >
+            {q.title}
+          </button>
+        ))}
       </div>
-      <p className="read-the-docs">
-        Implement the request and response interceptors in the code above.
-      </p>
+
+      <div className="question-container">
+        <h2>{questions[activeQuestion - 1].title}</h2>
+        <p>{questions[activeQuestion - 1].description}</p>
+        
+        <div className="requirements">
+          <h3>Requirements:</h3>
+          <ul>
+            {questions[activeQuestion - 1].points.map((point, index) => (
+              <li key={index}>{point}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <button onClick={() => navigate(`/question${activeQuestion}`)}>
+        Start
+      </button>
     </div>
   )
 }
-
-export default App

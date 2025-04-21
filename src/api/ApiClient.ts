@@ -2,6 +2,8 @@ import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { ApiClient, ApiRequestConfig, ApiResponse } from './types';
 import { Interceptors } from './interceptors';
 
+const baseUrl = 'https://jsonplaceholder.typicode.com/';
+
 export class BaseApiClient implements ApiClient {
   private axiosInstance: AxiosInstance;
   private interceptors: Interceptors;
@@ -18,6 +20,7 @@ export class BaseApiClient implements ApiClient {
   private setupInterceptors(): void {
     // Request interceptor
     this.axiosInstance.interceptors.request.use(
+      // @ts-expect-error - This is a workaround to avoid type errors
       async (config) => {
         if (this.interceptors.request.onRequest) {
           return await this.interceptors.request.onRequest(config);
@@ -34,6 +37,7 @@ export class BaseApiClient implements ApiClient {
 
     // Response interceptor
     this.axiosInstance.interceptors.response.use(
+      // @ts-expect-error - This is a workaround to avoid type errors
       async (response) => {
         if (this.interceptors.response.onResponse) {
           return await this.interceptors.response.onResponse(response);
@@ -54,12 +58,13 @@ export class BaseApiClient implements ApiClient {
     return this.transformResponse(response);
   }
 
-  async post<T>(url: string, data?: any, config?: ApiRequestConfig): Promise<ApiResponse<T>> {
+  //
+  async post<T>(url: string, data?: unknown, config?: ApiRequestConfig): Promise<ApiResponse<T>> {
     const response = await this.axiosInstance.post<T>(url, data, config as AxiosRequestConfig);
     return this.transformResponse(response);
   }
 
-  async put<T>(url: string, data?: any, config?: ApiRequestConfig): Promise<ApiResponse<T>> {
+  async put<T>(url: string, data?: unknown, config?: ApiRequestConfig): Promise<ApiResponse<T>> {
     const response = await this.axiosInstance.put<T>(url, data, config as AxiosRequestConfig);
     return this.transformResponse(response);
   }
@@ -76,4 +81,21 @@ export class BaseApiClient implements ApiClient {
       message: response.statusText,
     };
   }
-} 
+}
+
+const interceptors: Interceptors = {
+  request: {
+    onRequest: (config) => {
+      // * Modify the request if needed
+      return config
+    },
+  },
+  response: {
+    onResponse: (response) => {
+      // * Modify the response if needed
+      return response
+    },
+  },
+}
+
+export const apiClient = new BaseApiClient(baseUrl, interceptors)

@@ -81,3 +81,120 @@ pre {
 .read-the-docs {
   color: #888;
 }
+
+.questions-nav {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.nav-button {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  background-color: #1a1a1a;
+  border: 1px solid #646cff;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-button:hover {
+  background-color: #646cff;
+}
+
+.nav-button.active {
+  background-color: #646cff;
+}
+
+.question-container {
+  width: 100%;
+  max-width: 800px;
+  text-align: left;
+  padding: 2rem;
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  border: 1px solid #646cff;
+}
+
+.question-container h2 {
+  color: #646cff;
+  margin-bottom: 1rem;
+}
+
+.question-container p {
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.requirements {
+  background-color: #242424;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 2rem;
+}
+
+.requirements h3 {
+  color: #646cff;
+  margin-bottom: 1rem;
+}
+
+.requirements ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.requirements li {
+  margin-bottom: 0.5rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.requirements li:before {
+  content: "•";
+  color: #646cff;
+  position: absolute;
+  left: 0;
+}
+
+.implementation-area {
+  margin-top: 2rem;
+}
+
+.implementation-area h3 {
+  color: #646cff;
+  margin-bottom: 1rem;
+}
+
+.code-editor {
+  background-color: #242424;
+  padding: 1rem;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+.code-editor pre {
+  margin: 0;
+  font-family: monospace;
+  white-space: pre-wrap;
+}
+
+.test-area {
+  width: 100%;
+  max-width: 800px;
+  padding: 2rem;
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  border: 1px solid #646cff;
+}
+
+.test-area button {
+  margin-bottom: 1rem;
+}
+
+.test-area pre {
+  text-align: left;
+  background-color: #242424;
+  padding: 1rem;
+  border-radius: 4px;
+  overflow-x: auto;
+}
