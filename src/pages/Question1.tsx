@@ -7,7 +7,7 @@ export default function Question1() {
   <>
     <button onClick={handleShowNotification}>
       Show Notification
-      </button>
+    </button>
   </>
   )
 }

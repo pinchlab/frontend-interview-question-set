@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import App from "../App";
-import Question1 from "../view/Question1";
-import Question2 from "../view/Question2";
+import Question1 from "../pages/Question1";
+import Question2 from "../pages/Question2";
 
 export default function Router() {
   return (
