@@ -1,11 +1,8 @@
 import { useState } from 'react'
-import './App.css'
 import questions from './question'
-import { useNavigate } from 'react-router-dom'
+import './App.css'
 
 export default function App() {
-  const navigate = useNavigate()
-
   const [activeQuestion, setActiveQuestion] = useState<number>(1)
 
   return (
@@ -38,9 +35,11 @@ export default function App() {
         </div>
       </div>
 
-      <button onClick={() => navigate(`/question${activeQuestion}`)}>
-        Start
-      </button>
+      <a href={`/question${activeQuestion}`} target="_blank">
+        <button className="bg-[#646cff] text-white px-4 py-2 rounded-md cursor-pointer">
+          Start
+        </button>
+      </a>
     </div>
   )
 }

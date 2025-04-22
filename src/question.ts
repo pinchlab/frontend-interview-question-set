@@ -7,6 +7,7 @@ const questions = [
       "The system should support different types of notifications (success, error) and differentiate their styles based on the type.",
       "Use setTimeout or setInterval to automatically dismiss notifications after a set time.",
       "should be able to handle multiple notifications with correct order and position",
+      "notification should not be overlapped",
     ]
   },
   {
